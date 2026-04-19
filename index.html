@@ -591,6 +591,33 @@
 
   /* Card match (click A then B) */
   .card-match-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+  /* ── NUMBER MATCH: flat 2-column layout ──
+     Each .nm-table is a CSS grid: [num][hebrew] | [input][english]
+     Two pairs per row via the outer .nm-outer grid ── */
+  .nm-outer { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+  @media (max-width: 580px) { .nm-outer { grid-template-columns: 1fr; } }
+  .nm-pair { display: grid; grid-template-columns: 26px 1fr 38px 1fr; align-items: center;
+    gap: 6px; padding: 7px 10px; background: white; border: 1.5px solid var(--border);
+    border-radius: 8px; font-size: 0.88rem; }
+  .nm-badge { width: 24px; height: 24px; background: var(--navy); color: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; }
+  .nm-he { direction: rtl; text-align: right; color: var(--text); line-height: 1.3; }
+  .nm-en { color: var(--text); line-height: 1.3; }
+  .nm-divider { width: 1px; background: var(--border); align-self: stretch; }
+  .num-input { width: 34px; height: 28px; text-align: center; border: 1.5px solid var(--blue);
+    border-radius: 6px; font-family: 'Source Serif 4', serif; font-size: 0.95rem; font-weight: 700;
+    color: var(--blue); }
+  .num-input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-light); }
+  .num-input.correct-num { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); }
+  .num-input.wrong-num   { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
+  /* keep old classes for any remaining usage */
+  .num-match-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .num-col-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .num-list { display: flex; flex-direction: column; gap: 6px; }
+  .num-row { display: flex; align-items: center; gap: 7px; padding: 7px 9px; background: white; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.85rem; }
+  .num-badge { min-width: 22px; height: 22px; background: var(--navy); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+  .num-word { flex: 1; color: var(--text); line-height: 1.3; font-size: 0.83rem; }
   @media (max-width: 560px) { .card-match-wrap { grid-template-columns: 1fr; } }
   .card-group-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; text-align: center; }
   .card-grid { display: flex; flex-direction: column; gap: 8px; }
@@ -1440,37 +1467,16 @@
         <div class="attempt-dot" id="dot-t3q2-1"></div>
         <div class="attempt-dot" id="dot-t3q2-2"></div>
       </div>
-      <div class="num-match-wrap">
-        <!-- Hebrew numbered list (shuffled) -->
-        <div>
-          <div class="num-col-label">Hebrew 🔢</div>
-          <div class="num-list">
-            <div class="num-row"><div class="num-badge">1</div><div class="num-word" style="direction:rtl;">זה המון</div></div>
-            <div class="num-row"><div class="num-badge">2</div><div class="num-word" style="direction:rtl;">רגוע</div></div>
-            <div class="num-row"><div class="num-badge">3</div><div class="num-word" style="direction:rtl;">זה בטח ממש קשה</div></div>
-            <div class="num-row"><div class="num-badge">4</div><div class="num-word" style="direction:rtl;">הבנתי, קלטתי (אני מבין את זה עכשיו)</div></div>
-            <div class="num-row"><div class="num-badge">5</div><div class="num-word" style="direction:rtl;">לנגן בפסנתר</div></div>
-            <div class="num-row"><div class="num-badge">6</div><div class="num-word" style="direction:rtl;">אף פעם לא באמת חשבתי על זה ככה</div></div>
-            <div class="num-row"><div class="num-badge">7</div><div class="num-word" style="direction:rtl;">אני מניח</div></div>
-            <div class="num-row"><div class="num-badge">8</div><div class="num-word" style="direction:rtl;">אסיר תודה</div></div>
-            <div class="num-row"><div class="num-badge">9</div><div class="num-word" style="direction:rtl;">בשנה הבאה</div></div>
-          </div>
-        </div>
-        <!-- English with number inputs -->
-        <div>
-          <div class="num-col-label">English ✏️</div>
-          <div class="num-list">
-            <div class="num-row"><input class="num-input" id="nm-t3q2-1" data-answer="1" oninput="onNumMatchInput('t3q2')"><div class="num-word">It's a lot</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t3q2-2" data-answer="2" oninput="onNumMatchInput('t3q2')"><div class="num-word">calm</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t3q2-3" data-answer="3" oninput="onNumMatchInput('t3q2')"><div class="num-word">That must be really hard</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t3q2-4" data-answer="4" oninput="onNumMatchInput('t3q2')"><div class="num-word">I get it now</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t3q2-5" data-answer="5" oninput="onNumMatchInput('t3q2')"><div class="num-word">play the piano</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t3q2-6" data-answer="6" oninput="onNumMatchInput('t3q2')"><div class="num-word">I never really thought about it like that.</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t3q2-7" data-answer="7" oninput="onNumMatchInput('t3q2')"><div class="num-word">I guess</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t3q2-8" data-answer="8" oninput="onNumMatchInput('t3q2')"><div class="num-word">feel thankful</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t3q2-9" data-answer="9" oninput="onNumMatchInput('t3q2')"><div class="num-word">next year</div></div>
-          </div>
-        </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <table style="width:100%;border-collapse:collapse;background:white;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;">
+          <thead><tr><th style="padding:6px 10px;background:var(--navy);color:white;font-size:0.72rem;letter-spacing:0.08em;text-align:right;direction:rtl;">עברית 🔢</th></tr></thead>
+          <tbody><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">1</span>זה המון</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">2</span>רגוע</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">3</span>זה בטח ממש קשה</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">4</span>הבנתי, קלטתי (אני מבין את זה עכשיו)</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">5</span>לנגן בפסנתר</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">6</span>אף פעם לא באמת חשבתי על זה ככה</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">7</span>אני מניח</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">8</span>אסיר תודה</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">9</span>בשנה הבאה</td></tr></tbody>
+        </table>
+        <table style="width:100%;border-collapse:collapse;background:white;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;">
+          <thead><tr><th style="padding:6px 10px;background:var(--blue);color:white;font-size:0.72rem;letter-spacing:0.08em;text-align:left;">English ✏️</th></tr></thead>
+          <tbody><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t3q2-1" data-answer="2" maxlength="2" oninput="onNumMatchInput('t3q2')" style="margin-right:8px;"> calm</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t3q2-2" data-answer="9" maxlength="2" oninput="onNumMatchInput('t3q2')" style="margin-right:8px;"> next year</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t3q2-3" data-answer="1" maxlength="2" oninput="onNumMatchInput('t3q2')" style="margin-right:8px;"> It's a lot</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t3q2-4" data-answer="4" maxlength="2" oninput="onNumMatchInput('t3q2')" style="margin-right:8px;"> I get it now</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t3q2-5" data-answer="6" maxlength="2" oninput="onNumMatchInput('t3q2')" style="margin-right:8px;"> I never really thought about it like that.</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t3q2-6" data-answer="5" maxlength="2" oninput="onNumMatchInput('t3q2')" style="margin-right:8px;"> play the piano</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t3q2-7" data-answer="8" maxlength="2" oninput="onNumMatchInput('t3q2')" style="margin-right:8px;"> feel thankful</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t3q2-8" data-answer="7" maxlength="2" oninput="onNumMatchInput('t3q2')" style="margin-right:8px;"> I guess</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t3q2-9" data-answer="3" maxlength="2" oninput="onNumMatchInput('t3q2')" style="margin-right:8px;"> That must be really hard</td></tr></tbody>
+        </table>
+      </div>
       </div>
       <button class="submit-btn" id="submit-t3q2" onclick="submitNumMatch('t3q2',9)" disabled>Submit</button>
       <div class="feedback-box" id="feedback-t3q2"></div>
@@ -2025,54 +2031,29 @@
       </div>
 
       <p style="font-size:0.82rem;font-weight:600;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Round 1</p>
-      <div class="num-match-wrap" style="margin-bottom:24px;">
-        <div>
-          <div class="num-col-label">Hebrew 🔢</div>
-          <div class="num-list">
-            <div class="num-row"><div class="num-badge">1</div><div class="num-word" style="direction:rtl;">מדויק</div></div>
-            <div class="num-row"><div class="num-badge">2</div><div class="num-word" style="direction:rtl;">בדרך</div></div>
-            <div class="num-row"><div class="num-badge">3</div><div class="num-word" style="direction:rtl;">להזכיר</div></div>
-            <div class="num-row"><div class="num-badge">4</div><div class="num-word" style="direction:rtl;">פגישה</div></div>
-            <div class="num-row"><div class="num-badge">5</div><div class="num-word" style="direction:rtl;">פתאום</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="num-col-label">English ✏️</div>
-          <div class="num-list">
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r1" data-answer="3" oninput="onNumMatchInput('t5q4')"><div class="num-word">remind</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r2" data-answer="5" oninput="onNumMatchInput('t5q4')"><div class="num-word">suddenly</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r3" data-answer="1" oninput="onNumMatchInput('t5q4')"><div class="num-word">exact</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r4" data-answer="4" oninput="onNumMatchInput('t5q4')"><div class="num-word">appointment</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r5" data-answer="2" oninput="onNumMatchInput('t5q4')"><div class="num-word">on our way</div></div>
-          </div>
-        </div>
+      <p style="font-size:0.82rem;font-weight:600;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Round 1</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <table style="width:100%;border-collapse:collapse;background:white;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;">
+          <thead><tr><th style="padding:6px 10px;background:var(--navy);color:white;font-size:0.72rem;letter-spacing:0.08em;text-align:right;direction:rtl;">עברית 🔢</th></tr></thead>
+          <tbody><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">1</span>מדויק</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">2</span>בדרך</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">3</span>להזכיר</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">4</span>פגישה</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">5</span>פתאום</td></tr></tbody>
+        </table>
+        <table style="width:100%;border-collapse:collapse;background:white;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;">
+          <thead><tr><th style="padding:6px 10px;background:var(--blue);color:white;font-size:0.72rem;letter-spacing:0.08em;text-align:left;">English ✏️</th></tr></thead>
+          <tbody><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r1" data-answer="1" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> exact</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r2" data-answer="5" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> suddenly</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r3" data-answer="2" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> on our way</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r4" data-answer="4" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> appointment</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r5" data-answer="3" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> remind</td></tr></tbody>
+        </table>
       </div>
-
       <p style="font-size:0.82rem;font-weight:600;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Round 2</p>
-      <div class="num-match-wrap">
-        <div>
-          <div class="num-col-label">Hebrew 🔢</div>
-          <div class="num-list">
-            <div class="num-row"><div class="num-badge">1</div><div class="num-word" style="direction:rtl;">מבחן</div></div>
-            <div class="num-row"><div class="num-badge">2</div><div class="num-word" style="direction:rtl;">השארתי (שכחתי)</div></div>
-            <div class="num-row"><div class="num-badge">3</div><div class="num-word" style="direction:rtl;">אמורים להיפגש</div></div>
-            <div class="num-row"><div class="num-badge">4</div><div class="num-word" style="direction:rtl;">בודאות, בבירור</div></div>
-            <div class="num-row"><div class="num-badge">5</div><div class="num-word" style="direction:rtl;">סיסמה</div></div>
-          </div>
-        </div>
-        <div>
-          <div class="num-col-label">English ✏️</div>
-          <div class="num-list">
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r6" data-answer="3" oninput="onNumMatchInput('t5q4')"><div class="num-word">supposed to meet</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r7" data-answer="4" oninput="onNumMatchInput('t5q4')"><div class="num-word">clearly</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r8" data-answer="2" oninput="onNumMatchInput('t5q4')"><div class="num-word">left</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r9" data-answer="5" oninput="onNumMatchInput('t5q4')"><div class="num-word">password</div></div>
-            <div class="num-row"><input class="num-input" id="nm-t5q4-r10" data-answer="1" oninput="onNumMatchInput('t5q4')"><div class="num-word">exam</div></div>
-          </div>
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <table style="width:100%;border-collapse:collapse;background:white;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;">
+          <thead><tr><th style="padding:6px 10px;background:var(--navy);color:white;font-size:0.72rem;letter-spacing:0.08em;text-align:right;direction:rtl;">עברית 🔢</th></tr></thead>
+          <tbody><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">1</span>מבחן</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">2</span>השארתי (שכחתי)</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">3</span>אמורים להיפגש</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">4</span>בודאות, בבירור</td></tr><tr><td style="padding:6px 8px;text-align:right;direction:rtl;font-size:0.88rem;border-bottom:1px solid var(--border);"><span style="display:inline-block;width:20px;height:20px;background:var(--navy);color:white;border-radius:50%;text-align:center;line-height:20px;font-size:0.72rem;font-weight:700;margin-left:6px;">5</span>סיסמה</td></tr></tbody>
+        </table>
+        <table style="width:100%;border-collapse:collapse;background:white;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;">
+          <thead><tr><th style="padding:6px 10px;background:var(--blue);color:white;font-size:0.72rem;letter-spacing:0.08em;text-align:left;">English ✏️</th></tr></thead>
+          <tbody><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r6" data-answer="1" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> exam</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r7" data-answer="2" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> left</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r8" data-answer="4" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> clearly</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r9" data-answer="3" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> supposed to meet</td></tr><tr><td style="padding:6px 8px;font-size:0.88rem;border-bottom:1px solid var(--border);"><input class="num-input" id="nm-t5q4-r10" data-answer="5" maxlength="2" oninput="onNumMatchInput('t5q4')" style="margin-right:8px;"> password</td></tr></tbody>
+        </table>
       </div>
-
-      <button class="submit-btn" id="submit-t5q4" onclick="submitNumMatch('t5q4',10)" disabled>Submit</button>
+            <button class="submit-btn" id="submit-t5q4" onclick="submitNumMatch('t5q4',10)" disabled>Submit</button>
       <div class="feedback-box" id="feedback-t5q4"></div>
     </div>
 
