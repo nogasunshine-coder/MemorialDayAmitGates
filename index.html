@@ -2352,7 +2352,7 @@ const POINTS = {
 // ══════════════════════════════════════════════
 //  STATE & STORAGE
 // ══════════════════════════════════════════════
-const SAVE_KEY = 'yom_hazikaron_v1';
+const SAVE_KEY = 'yom_hazikaron_v3';
 
 const state = {
   tab1: {
@@ -3919,100 +3919,95 @@ const CARD_PAIRS_T3Q4 = { t1:'p3', t2:'p2', t3:'p1' }; // flag=p1(Israeli flag),
 let cardSelectedA = {}; // {qid: element}
 
 function cardClick(el, qid) {
-  // ── Unified card-click for t3q2, t3q4, t5q4a, t5q4b ──
-  // A-side groups: 'A' (t3q2), 'T' (t3q4), 'HA' (t5q4a), 'HB' (t5q4b)
-  // B-side groups: 'B' (t3q2), 'P' (t3q4), 'EA' (t5q4a), 'EB' (t5q4b)
+  // A-side groups (left column): A, T, HA, HB
+  // B-side groups (right column): B, P, EA, EB
   const A_GROUPS = ['A', 'T', 'HA', 'HB'];
 
-  // Get correct state object
-  let qs, pkey, correctPairs;
+  // Resolve state and storage key
+  let qs, pkey, correctPairs, submitId;
   if (qid === 't3q2') {
-    qs = state.tab3.t3q2; correctPairs = CARD_PAIRS_T3Q2; pkey = 'pairs';
+    qs = state.tab3.t3q2; pkey = 'pairs'; correctPairs = CARD_PAIRS_T3Q2; submitId = 'submit-t3q2';
   } else if (qid === 't3q4') {
-    qs = state.tab3.t3q4; correctPairs = CARD_PAIRS_T3Q4; pkey = 'pairs';
+    qs = state.tab3.t3q4; pkey = 'pairs'; correctPairs = CARD_PAIRS_T3Q4; submitId = 'submit-t3q4';
   } else if (qid === 't5q4a') {
-    qs = state.tab5.t5q4; correctPairs = PAIRS_T5Q4A; pkey = 'pairsA';
+    qs = state.tab5.t5q4; pkey = 'pairsA'; correctPairs = PAIRS_T5Q4A; submitId = 'submit-t5q4';
   } else if (qid === 't5q4b') {
-    qs = state.tab5.t5q4; correctPairs = PAIRS_T5Q4B; pkey = 'pairsB';
-  } else {
-    return;
-  }
+    qs = state.tab5.t5q4; pkey = 'pairsB'; correctPairs = PAIRS_T5Q4B; submitId = 'submit-t5q4';
+  } else { return; }
 
   if (!qs || qs.done) return;
   if (el.classList.contains('matched-correct')) return;
 
-  const group = el.dataset.group;
-  const prevSel = cardSelectedA[qid];
+  // Ensure storage exists
+  if (!qs[pkey]) qs[pkey] = {};
 
-  // Deselect if clicking same card
-  if (prevSel === el) {
+  const elIsA   = A_GROUPS.includes(el.dataset.group);
+  const prevEl  = cardSelectedA[qid] || null;
+  const prevIsA = prevEl ? A_GROUPS.includes(prevEl.dataset.group) : null;
+
+  // Case 1: click same card → deselect
+  if (prevEl === el) {
     el.classList.remove('selected-card');
     cardSelectedA[qid] = null;
     return;
   }
 
-  // Same side — switch selection
-  const elIsA    = A_GROUPS.includes(group);
-  const prevIsA  = prevSel ? A_GROUPS.includes(prevSel.dataset.group) : null;
-
-  if (prevSel && elIsA === prevIsA) {
-    prevSel.classList.remove('selected-card');
+  // Case 2: no selection yet → select this card
+  if (!prevEl) {
     el.classList.add('selected-card');
     cardSelectedA[qid] = el;
     return;
   }
 
-  // No previous selection — just highlight
-  if (!prevSel) {
+  // Case 3: same side → switch selection
+  if (elIsA === prevIsA) {
+    prevEl.classList.remove('selected-card');
     el.classList.add('selected-card');
     cardSelectedA[qid] = el;
     return;
   }
 
-  // ── Two different sides — form a pair ──
-  const aEl = prevIsA ? prevSel : el;
-  const bEl = prevIsA ? el : prevSel;
+  // Case 4: opposite sides → create pair
+  const aEl = prevIsA ? prevEl : el;
+  const bEl = prevIsA ? el : prevEl;
+  const aId = aEl.dataset.id;
+  const bId = bEl.dataset.id;
 
+  // Clear visual selection
   aEl.classList.remove('selected-card');
   bEl.classList.remove('selected-card');
   cardSelectedA[qid] = null;
 
-  const aId = aEl.dataset.id;
-  const bId = bEl.dataset.id;
-
-  if (!qs[pkey]) qs[pkey] = {};
-
-  // Un-pair old B that was linked to this A
+  // Remove old pairing for this A card
   const oldBId = qs[pkey][aId];
   if (oldBId) {
-    const oldB = document.querySelector(`[data-id="${oldBId}"]`);
-    if (oldB) { oldB.classList.remove('paired-card', 'matched-wrong'); }
+    document.querySelector(`[data-id="${oldBId}"]`)?.classList.remove('paired-card', 'matched-wrong');
   }
 
-  // Un-pair old A that was linked to this B
-  const oldAId = Object.keys(qs[pkey]).find(k => qs[pkey][k] === bId);
-  if (oldAId) {
-    const oldA = document.querySelector(`[data-id="${oldAId}"]`);
-    if (oldA) { oldA.classList.remove('paired-card', 'matched-wrong'); }
-    delete qs[pkey][oldAId];
+  // Remove old pairing for this B card (if another A had it)
+  for (const [k, v] of Object.entries(qs[pkey])) {
+    if (v === bId && k !== aId) {
+      document.querySelector(`[data-id="${k}"]`)?.classList.remove('paired-card', 'matched-wrong');
+      delete qs[pkey][k];
+      break;
+    }
   }
 
-  // Record and show pairing
+  // Store and show pair
   qs[pkey][aId] = bId;
   aEl.classList.add('paired-card');
   bEl.classList.add('paired-card');
 
-  // Enable submit when all pairs made
-  const totalPairs = Object.keys(correctPairs).length;
-  const madePairs  = Object.keys(qs[pkey]).length;
+  // Enable submit when all pairs are made
+  const madeCount = Object.keys(qs[pkey]).length;
+  const needCount = Object.keys(correctPairs).length;
 
-  if (qid === 't5q4a' || qid === 't5q4b') {
-    // Both rounds must be complete for submit-t5q4
-    const aFull = Object.keys(PAIRS_T5Q4A).every(k => qs.pairsA && qs.pairsA[k]);
-    const bFull = Object.keys(PAIRS_T5Q4B).every(k => qs.pairsB && qs.pairsB[k]);
-    document.getElementById('submit-t5q4').disabled = !(aFull && bFull);
+  if (submitId === 'submit-t5q4') {
+    const aFull = Object.keys(PAIRS_T5Q4A).length === Object.keys(qs.pairsA || {}).length;
+    const bFull = Object.keys(PAIRS_T5Q4B).length === Object.keys(qs.pairsB || {}).length;
+    document.getElementById(submitId).disabled = !(aFull && bFull);
   } else {
-    document.getElementById(`submit-${qid}`).disabled = madePairs < totalPairs;
+    document.getElementById(submitId).disabled = (madeCount < needCount);
   }
 
   saveState();
