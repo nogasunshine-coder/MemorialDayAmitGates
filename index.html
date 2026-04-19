@@ -1435,42 +1435,44 @@
     <!-- ── T3Q2: Card match EN ↔ HE ── -->
     <div class="question-card" id="qcard-t3q2">
       <div class="question-text">Match the words and phrases to their Hebrew translation:</div>
-      <div class="question-note" style="direction:rtl;text-align:right;">התאימו בין המילים והביטויים לפירוש בעברית:</div>
+      <div class="question-note">Write the correct number next to each English word. &nbsp;<span style="direction:rtl;display:inline-block;">כתבו את המספר הנכון ליד כל מילה באנגלית.</span></div>
       <div class="attempts-badge" id="attempts-t3q2">
         <div class="attempt-dot" id="dot-t3q2-1"></div>
         <div class="attempt-dot" id="dot-t3q2-2"></div>
       </div>
-      <div class="card-match-wrap">
+      <div class="num-match-wrap">
+        <!-- Hebrew numbered list (shuffled) -->
         <div>
-          <div class="card-group-label">Group A (English)</div>
-          <div class="card-grid" id="cardA-t3q2">
-            <div class="match-card" data-group="A" data-id="c1" onclick="cardClick(this,'t3q2')">It's a lot</div>
-            <div class="match-card" data-group="A" data-id="c2" onclick="cardClick(this,'t3q2')">calm</div>
-            <div class="match-card" data-group="A" data-id="c3" onclick="cardClick(this,'t3q2')">That must be really hard</div>
-            <div class="match-card" data-group="A" data-id="c4" onclick="cardClick(this,'t3q2')">I get it now</div>
-            <div class="match-card" data-group="A" data-id="c5" onclick="cardClick(this,'t3q2')">play the piano</div>
-            <div class="match-card" data-group="A" data-id="c6" onclick="cardClick(this,'t3q2')">I never really thought about it like that.</div>
-            <div class="match-card" data-group="A" data-id="c7" onclick="cardClick(this,'t3q2')">I guess</div>
-            <div class="match-card" data-group="A" data-id="c8" onclick="cardClick(this,'t3q2')">feel thankful</div>
-            <div class="match-card" data-group="A" data-id="c9" onclick="cardClick(this,'t3q2')">next year</div>
+          <div class="num-col-label">Hebrew 🔢</div>
+          <div class="num-list">
+            <div class="num-row"><div class="num-badge">1</div><div class="num-word" style="direction:rtl;">זה המון</div></div>
+            <div class="num-row"><div class="num-badge">2</div><div class="num-word" style="direction:rtl;">רגוע</div></div>
+            <div class="num-row"><div class="num-badge">3</div><div class="num-word" style="direction:rtl;">זה בטח ממש קשה</div></div>
+            <div class="num-row"><div class="num-badge">4</div><div class="num-word" style="direction:rtl;">הבנתי, קלטתי (אני מבין את זה עכשיו)</div></div>
+            <div class="num-row"><div class="num-badge">5</div><div class="num-word" style="direction:rtl;">לנגן בפסנתר</div></div>
+            <div class="num-row"><div class="num-badge">6</div><div class="num-word" style="direction:rtl;">אף פעם לא באמת חשבתי על זה ככה</div></div>
+            <div class="num-row"><div class="num-badge">7</div><div class="num-word" style="direction:rtl;">אני מניח</div></div>
+            <div class="num-row"><div class="num-badge">8</div><div class="num-word" style="direction:rtl;">אסיר תודה</div></div>
+            <div class="num-row"><div class="num-badge">9</div><div class="num-word" style="direction:rtl;">בשנה הבאה</div></div>
           </div>
         </div>
+        <!-- English with number inputs -->
         <div>
-          <div class="card-group-label">Group B (Hebrew)</div>
-          <div class="card-grid" id="cardB-t3q2">
-            <div class="match-card" data-group="B" data-id="h3" onclick="cardClick(this,'t3q2')">זה בטח ממש קשה</div>
-            <div class="match-card" data-group="B" data-id="h7" onclick="cardClick(this,'t3q2')">אני מניח</div>
-            <div class="match-card" data-group="B" data-id="h1" onclick="cardClick(this,'t3q2')">זה המון</div>
-            <div class="match-card" data-group="B" data-id="h5" onclick="cardClick(this,'t3q2')">לנגן בפסנתר</div>
-            <div class="match-card" data-group="B" data-id="h9" onclick="cardClick(this,'t3q2')">בשנה הבאה</div>
-            <div class="match-card" data-group="B" data-id="h2" onclick="cardClick(this,'t3q2')">רגוע</div>
-            <div class="match-card" data-group="B" data-id="h8" onclick="cardClick(this,'t3q2')">אסיר תודה</div>
-            <div class="match-card" data-group="B" data-id="h4" onclick="cardClick(this,'t3q2')">הבנתי, קלטתי (אני מבין את זה עכשיו)</div>
-            <div class="match-card" data-group="B" data-id="h6" onclick="cardClick(this,'t3q2')">אף פעם לא באמת חשבתי על זה ככה</div>
+          <div class="num-col-label">English ✏️</div>
+          <div class="num-list">
+            <div class="num-row"><input class="num-input" id="nm-t3q2-1" data-answer="1" oninput="onNumMatchInput('t3q2')"><div class="num-word">It's a lot</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t3q2-2" data-answer="2" oninput="onNumMatchInput('t3q2')"><div class="num-word">calm</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t3q2-3" data-answer="3" oninput="onNumMatchInput('t3q2')"><div class="num-word">That must be really hard</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t3q2-4" data-answer="4" oninput="onNumMatchInput('t3q2')"><div class="num-word">I get it now</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t3q2-5" data-answer="5" oninput="onNumMatchInput('t3q2')"><div class="num-word">play the piano</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t3q2-6" data-answer="6" oninput="onNumMatchInput('t3q2')"><div class="num-word">I never really thought about it like that.</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t3q2-7" data-answer="7" oninput="onNumMatchInput('t3q2')"><div class="num-word">I guess</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t3q2-8" data-answer="8" oninput="onNumMatchInput('t3q2')"><div class="num-word">feel thankful</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t3q2-9" data-answer="9" oninput="onNumMatchInput('t3q2')"><div class="num-word">next year</div></div>
           </div>
         </div>
       </div>
-      <button class="submit-btn" id="submit-t3q2" onclick="submitCardMatch('t3q2')" disabled>Submit</button>
+      <button class="submit-btn" id="submit-t3q2" onclick="submitNumMatch('t3q2',9)" disabled>Submit</button>
       <div class="feedback-box" id="feedback-t3q2"></div>
     </div>
 
@@ -2013,62 +2015,64 @@
       <div class="feedback-box" id="feedback-t5q3"></div>
     </div>
 
-    <!-- ── T5Q4: Card match HE↔EN (2 rounds) ── -->
+    <!-- ── T5Q4: Number match HE↔EN ── -->
     <div class="question-card" id="qcard-t5q4">
       <div class="question-text">Match the English to the Hebrew translations:</div>
+      <div class="question-note">Write the correct number next to each English word. &nbsp;<span style="direction:rtl;display:inline-block;">כתבו את המספר הנכון ליד כל מילה באנגלית.</span></div>
       <div class="attempts-badge" id="attempts-t5q4">
         <div class="attempt-dot" id="dot-t5q4-1"></div>
         <div class="attempt-dot" id="dot-t5q4-2"></div>
       </div>
-      <!-- Group 1 -->
+
       <p style="font-size:0.82rem;font-weight:600;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Round 1</p>
-      <div class="card-match-wrap" style="margin-bottom:20px;">
+      <div class="num-match-wrap" style="margin-bottom:24px;">
         <div>
-          <div class="card-group-label">Group A (Hebrew)</div>
-          <div class="card-grid" id="cardA-t5q4a">
-            <div class="match-card" data-group="HA" data-id="ha1" onclick="cardClick(this,'t5q4a')">מדויק</div>
-            <div class="match-card" data-group="HA" data-id="ha2" onclick="cardClick(this,'t5q4a')">בדרך</div>
-            <div class="match-card" data-group="HA" data-id="ha3" onclick="cardClick(this,'t5q4a')">להזכיר</div>
-            <div class="match-card" data-group="HA" data-id="ha4" onclick="cardClick(this,'t5q4a')">פגישה</div>
-            <div class="match-card" data-group="HA" data-id="ha5" onclick="cardClick(this,'t5q4a')">פתאום</div>
+          <div class="num-col-label">Hebrew 🔢</div>
+          <div class="num-list">
+            <div class="num-row"><div class="num-badge">1</div><div class="num-word" style="direction:rtl;">מדויק</div></div>
+            <div class="num-row"><div class="num-badge">2</div><div class="num-word" style="direction:rtl;">בדרך</div></div>
+            <div class="num-row"><div class="num-badge">3</div><div class="num-word" style="direction:rtl;">להזכיר</div></div>
+            <div class="num-row"><div class="num-badge">4</div><div class="num-word" style="direction:rtl;">פגישה</div></div>
+            <div class="num-row"><div class="num-badge">5</div><div class="num-word" style="direction:rtl;">פתאום</div></div>
           </div>
         </div>
         <div>
-          <div class="card-group-label">Group B (English)</div>
-          <div class="card-grid" id="cardB-t5q4a">
-            <div class="match-card" data-group="EA" data-id="ea1" onclick="cardClick(this,'t5q4a')">remind</div>
-            <div class="match-card" data-group="EA" data-id="ea2" onclick="cardClick(this,'t5q4a')">suddenly</div>
-            <div class="match-card" data-group="EA" data-id="ea3" onclick="cardClick(this,'t5q4a')">exact</div>
-            <div class="match-card" data-group="EA" data-id="ea4" onclick="cardClick(this,'t5q4a')">appointment</div>
-            <div class="match-card" data-group="EA" data-id="ea5" onclick="cardClick(this,'t5q4a')">on our way</div>
+          <div class="num-col-label">English ✏️</div>
+          <div class="num-list">
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r1" data-answer="3" oninput="onNumMatchInput('t5q4')"><div class="num-word">remind</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r2" data-answer="5" oninput="onNumMatchInput('t5q4')"><div class="num-word">suddenly</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r3" data-answer="1" oninput="onNumMatchInput('t5q4')"><div class="num-word">exact</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r4" data-answer="4" oninput="onNumMatchInput('t5q4')"><div class="num-word">appointment</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r5" data-answer="2" oninput="onNumMatchInput('t5q4')"><div class="num-word">on our way</div></div>
           </div>
         </div>
       </div>
-      <!-- Group 2 -->
+
       <p style="font-size:0.82rem;font-weight:600;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Round 2</p>
-      <div class="card-match-wrap">
+      <div class="num-match-wrap">
         <div>
-          <div class="card-group-label">Group A (Hebrew)</div>
-          <div class="card-grid" id="cardA-t5q4b">
-            <div class="match-card" data-group="HB" data-id="hb1" onclick="cardClick(this,'t5q4b')">מבחן</div>
-            <div class="match-card" data-group="HB" data-id="hb2" onclick="cardClick(this,'t5q4b')">השארתי (שכחתי)</div>
-            <div class="match-card" data-group="HB" data-id="hb3" onclick="cardClick(this,'t5q4b')">אמורים להיפגש</div>
-            <div class="match-card" data-group="HB" data-id="hb4" onclick="cardClick(this,'t5q4b')">בודאות, בבירור</div>
-            <div class="match-card" data-group="HB" data-id="hb5" onclick="cardClick(this,'t5q4b')">סיסמה</div>
+          <div class="num-col-label">Hebrew 🔢</div>
+          <div class="num-list">
+            <div class="num-row"><div class="num-badge">1</div><div class="num-word" style="direction:rtl;">מבחן</div></div>
+            <div class="num-row"><div class="num-badge">2</div><div class="num-word" style="direction:rtl;">השארתי (שכחתי)</div></div>
+            <div class="num-row"><div class="num-badge">3</div><div class="num-word" style="direction:rtl;">אמורים להיפגש</div></div>
+            <div class="num-row"><div class="num-badge">4</div><div class="num-word" style="direction:rtl;">בודאות, בבירור</div></div>
+            <div class="num-row"><div class="num-badge">5</div><div class="num-word" style="direction:rtl;">סיסמה</div></div>
           </div>
         </div>
         <div>
-          <div class="card-group-label">Group B (English)</div>
-          <div class="card-grid" id="cardB-t5q4b">
-            <div class="match-card" data-group="EB" data-id="eb1" onclick="cardClick(this,'t5q4b')">supposed to meet</div>
-            <div class="match-card" data-group="EB" data-id="eb2" onclick="cardClick(this,'t5q4b')">clearly</div>
-            <div class="match-card" data-group="EB" data-id="eb3" onclick="cardClick(this,'t5q4b')">left</div>
-            <div class="match-card" data-group="EB" data-id="eb4" onclick="cardClick(this,'t5q4b')">password</div>
-            <div class="match-card" data-group="EB" data-id="eb5" onclick="cardClick(this,'t5q4b')">exam</div>
+          <div class="num-col-label">English ✏️</div>
+          <div class="num-list">
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r6" data-answer="3" oninput="onNumMatchInput('t5q4')"><div class="num-word">supposed to meet</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r7" data-answer="4" oninput="onNumMatchInput('t5q4')"><div class="num-word">clearly</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r8" data-answer="2" oninput="onNumMatchInput('t5q4')"><div class="num-word">left</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r9" data-answer="5" oninput="onNumMatchInput('t5q4')"><div class="num-word">password</div></div>
+            <div class="num-row"><input class="num-input" id="nm-t5q4-r10" data-answer="1" oninput="onNumMatchInput('t5q4')"><div class="num-word">exam</div></div>
           </div>
         </div>
       </div>
-      <button class="submit-btn" id="submit-t5q4" onclick="submitCardMatchT5()" disabled>Submit Both Rounds</button>
+
+      <button class="submit-btn" id="submit-t5q4" onclick="submitNumMatch('t5q4',10)" disabled>Submit</button>
       <div class="feedback-box" id="feedback-t5q4"></div>
     </div>
 
@@ -2379,7 +2383,7 @@ const state = {
     t5q1: { attempts:0, score:0, done:false, vals:{} },
     t5q2: { attempts:0, score:0, done:false, vals:{} },
     t5q3: { attempts:0, score:0, done:false, vals:{} },
-    t5q4: { attempts:0, score:0, done:false, pairsA:{}, pairsB:{} },
+    t5q4: { attempts:0, score:0, done:false, numVals:{} },
     t5q5: { attempts:0, score:0, done:false, answers:{}, selectedChip:null },
     t5q6: { attempts:0, score:0, done:false, vals:{} },
     t5q7: { attempts:0, score:0, done:false, answers:{}, selectedChip:null },
@@ -2395,7 +2399,7 @@ const state = {
   },
   tab3: {
     t3q1: { attempts: 0, score: 0, done: false, answers: {} },
-    t3q2: { attempts: 0, score: 0, done: false, pairs: {}, selectedCard: null },
+    t3q2: { attempts: 0, score: 0, done: false, numVals: {} },
     t3q3: { attempts: 0, score: 0, done: false, answers: {}, selectedChip: null },
     t3q4: { attempts: 0, score: 0, done: false, pairs: {}, selectedCard: null },
     t3q5: { attempts: 0, score: 0, done: false, answers: {}, selectedChip: null },
@@ -3421,6 +3425,122 @@ function submitCardMatchT5() {
     showFeedback('t5q4','partial',`⚠️ ${correct}/10 — wrong pairs cleared. One more try!`);
   }
   saveState();
+}
+
+// ══════════════════════════════════════════════
+//  NUMBER MATCH SYSTEM (t3q2, t5q4)
+// ══════════════════════════════════════════════
+const NUM_MATCH_IDS = {
+  't3q2': ['nm-t3q2-1','nm-t3q2-2','nm-t3q2-3','nm-t3q2-4','nm-t3q2-5',
+           'nm-t3q2-6','nm-t3q2-7','nm-t3q2-8','nm-t3q2-9'],
+  't5q4': ['nm-t5q4-r1','nm-t5q4-r2','nm-t5q4-r3','nm-t5q4-r4','nm-t5q4-r5',
+           'nm-t5q4-r6','nm-t5q4-r7','nm-t5q4-r8','nm-t5q4-r9','nm-t5q4-r10'],
+};
+
+function onNumMatchInput(qid) {
+  const ids = NUM_MATCH_IDS[qid];
+  if (!ids) return;
+  const allFilled = ids.every(id => document.getElementById(id)?.value.trim() !== '');
+  document.getElementById('submit-' + qid).disabled = !allFilled;
+  // save vals
+  const qs = getQState(qid) || (qid==='t5q4' ? state.tab5.t5q4 : null);
+  if (qs) {
+    if (!qs.numVals) qs.numVals = {};
+    ids.forEach(id => { qs.numVals[id] = document.getElementById(id)?.value || ''; });
+    saveState();
+  }
+}
+
+function submitNumMatch(qid, total) {
+  // Get state
+  let qs, updateScore;
+  if (qid === 't3q2') {
+    qs = state.tab3.t3q2;
+    updateScore = updateTab3Score;
+  } else if (qid === 't5q4') {
+    qs = state.tab5.t5q4;
+    updateScore = updateTab5Score;
+  } else { return; }
+
+  if (qs.done) return;
+  qs.attempts++;
+
+  const ids = NUM_MATCH_IDS[qid];
+  let correct = 0;
+  const wrongIds = [];
+
+  ids.forEach(id => {
+    const inp = document.getElementById(id);
+    if (!inp) return;
+    const val = inp.value.trim();
+    const ans = inp.dataset.answer;
+    if (val === ans) {
+      correct++;
+      inp.classList.add('correct-num');
+      inp.classList.remove('wrong-num');
+    } else {
+      inp.classList.add('wrong-num');
+      inp.classList.remove('correct-num');
+      wrongIds.push(id);
+    }
+    inp.disabled = true;
+  });
+
+  updateDots(qid, correct === total, qs.attempts);
+
+  if (correct === total) {
+    qs.done = true;
+    qs.score = qs.attempts === 1 ? POINTS[qid] : Math.round(POINTS[qid] * 0.6);
+    showFeedback(qid, 'correct', `✅ All ${total} correct! (+${qs.score} points)`);
+    document.getElementById('submit-' + qid).classList.add('done');
+    document.getElementById('submit-' + qid).disabled = true;
+    updateScore();
+  } else if (qs.attempts >= 2) {
+    qs.done = true; qs.score = 0;
+    // Reveal correct answers
+    ids.forEach(id => {
+      const inp = document.getElementById(id);
+      if (inp?.classList.contains('wrong-num')) inp.value = inp.dataset.answer;
+    });
+    showFeedback(qid, 'wrong', `❌ ${correct}/${total} correct. Correct answers shown.`);
+    document.getElementById('submit-' + qid).classList.add('done');
+    document.getElementById('submit-' + qid).disabled = true;
+    updateScore();
+  } else {
+    // Clear wrong ones and let try again
+    wrongIds.forEach(id => {
+      const inp = document.getElementById(id);
+      if (inp) { inp.classList.remove('wrong-num'); inp.value = ''; inp.disabled = false; }
+    });
+    document.getElementById('submit-' + qid).disabled = true;
+    showFeedback(qid, 'partial', `⚠️ ${correct}/${total} correct — wrong ones cleared. Try again!`);
+  }
+  saveState();
+}
+
+// ── Restore num-match inputs on page load ──
+function restoreNumMatch(qid) {
+  const qs = qid === 't5q4' ? state.tab5.t5q4 : getQState(qid);
+  if (!qs?.numVals) return;
+  const ids = NUM_MATCH_IDS[qid] || [];
+  ids.forEach(id => {
+    const inp = document.getElementById(id);
+    const val = qs.numVals[id];
+    if (inp && val) {
+      inp.value = val;
+      if (qs.done) {
+        inp.disabled = true;
+        inp.classList.add(val === inp.dataset.answer ? 'correct-num' : 'wrong-num');
+      }
+    }
+  });
+  if (qs.done) {
+    showFeedback(qid, qs.score > 0 ? 'correct' : 'wrong',
+      qs.score > 0 ? `✅ Completed. (+${qs.score} points)` : '❌ Completed — answers shown.');
+    const btn = document.getElementById('submit-' + qid);
+    if (btn) { btn.classList.add('done'); btn.disabled = true; }
+    updateDots(qid, qs.score > 0, qs.attempts);
+  }
 }
 
 // cardClick override removed — unified version below
@@ -4529,6 +4649,8 @@ function resetAll() {
 
 loadState();
 restoreUI();
+restoreNumMatch('t3q2');
+restoreNumMatch('t5q4');
 restoreTab2();
 restoreTab3();
 restoreTab4();
