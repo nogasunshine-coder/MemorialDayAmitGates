@@ -2910,49 +2910,77 @@ const MATCH_ANSWERS = {
   joinedArmy: 'הצטרף לצבא', oneday: 'יום אחד'
 };
 
-let matchSelectedChip = null; // currently selected chip for t2q3
-let matchSelectedChip4 = null; // for t2q4
-
-// Universal chip selection store
-const matchChipSelected = {}; // {bankId: chip}
+// ══════════════════════════════════════════════
+//  UNIVERSAL MATCH BANK/DROP SYSTEM
+//  Step 1: click a chip (highlights it)
+//  Step 2: click a drop slot (assigns the chip)
+//  Works for any qid — t2q3, t2q4, t3q3, t5q4 etc.
+// ══════════════════════════════════════════════
+let _activeMatchChip = null;  // the currently highlighted chip
+let _activeMatchQid  = null;  // which question it belongs to
 
 function matchBankClick(chip, qid) {
   if (!qid) qid = 't2q3';
   const qs = getQState(qid);
   if (!qs || qs.done) return;
-  const bankId = `match-bank-${qid}`;
-  document.querySelectorAll(`#${bankId} .bank-chip`).forEach(c => c.classList.remove('selected'));
-  if (matchChipSelected[qid] === chip) { matchChipSelected[qid] = null; return; }
+  if (chip.classList.contains('used')) return;
+
+  // Deselect if clicking same chip again
+  if (_activeMatchChip === chip) {
+    chip.classList.remove('selected');
+    _activeMatchChip = null;
+    _activeMatchQid  = null;
+    return;
+  }
+
+  // Deselect any previously selected chip (even from another qid)
+  if (_activeMatchChip) _activeMatchChip.classList.remove('selected');
+
   chip.classList.add('selected');
-  matchChipSelected[qid] = chip;
+  _activeMatchChip = chip;
+  _activeMatchQid  = qid;
 }
 
 function matchDropClick(drop, qid) {
   if (!qid) qid = 't2q3';
   const qs = getQState(qid);
   if (!qs || qs.done) return;
-  const sel = matchChipSelected[qid];
-  if (!sel) return;
-  const val = sel.dataset.val;
-  const key = drop.dataset.key;
+
+  // Must have an active chip selected for this same qid
+  if (!_activeMatchChip || _activeMatchQid !== qid) return;
+
+  const val    = _activeMatchChip.dataset.val;
+  const key    = drop.dataset.key;
   const bankId = `match-bank-${qid}`;
 
-  // Return old answer chip to bank
   if (!qs.answers) qs.answers = {};
+
+  // If this slot already has an answer, return old chip to bank
   const oldVal = qs.answers[key];
   if (oldVal) {
-    const oldChip = document.querySelector(`#${bankId} [data-val="${oldVal}"]`);
-    if (oldChip) oldChip.classList.remove('used');
+    const oldChip = document.querySelector(`#${bankId} [data-val="${CSS.escape(oldVal)}"]`)
+                 || document.querySelector(`#${bankId} [data-val="${oldVal}"]`);
+    if (oldChip) { oldChip.classList.remove('used'); }
   }
 
+  // If this chip was already placed in another slot, clear that slot
+  const prevKey = Object.keys(qs.answers).find(k => qs.answers[k] === val);
+  if (prevKey && prevKey !== key) {
+    const prevDrop = document.querySelector(`#match-pairs-${qid} [data-key="${prevKey}"]`);
+    if (prevDrop) { prevDrop.textContent = ''; prevDrop.classList.remove('has-answer'); }
+    delete qs.answers[prevKey];
+  }
+
+  // Assign
   qs.answers[key] = val;
   drop.textContent = val;
   drop.classList.add('has-answer');
-  sel.classList.add('used');
-  sel.classList.remove('selected');
-  matchChipSelected[qid] = null;
+  _activeMatchChip.classList.add('used');
+  _activeMatchChip.classList.remove('selected');
+  _activeMatchChip = null;
+  _activeMatchQid  = null;
 
-  // Check if all slots filled — enable submit
+  // Enable submit when all slots filled
   const allDrops = document.querySelectorAll(`#match-pairs-${qid} .match-drop`);
   const allFilled = [...allDrops].every(d => d.textContent.trim().length > 0);
   document.getElementById(`submit-${qid}`).disabled = !allFilled;
@@ -3344,14 +3372,14 @@ function submitCardMatchT5() {
   Object.entries(PAIRS_T5Q4A).forEach(([aId,bId]) => {
     const aEl=document.querySelector(`[data-id="${aId}"]`);
     const bEl=document.querySelector(`[data-id="${bId}"]`);
-    if (qs.pairsA[aId]===bId) { correctA++; aEl?.classList.add('matched-correct'); bEl?.classList.add('matched-correct'); }
+    if (qs.pairsA[aId]===bId) { correctA++; aEl?.classList.remove('paired-card'); aEl?.classList.add('matched-correct'); bEl?.classList.remove('paired-card'); bEl?.classList.add('matched-correct'); }
     else { const pEl=document.querySelector(`[data-id="${qs.pairsA[aId]}"]`); aEl?.classList.add('matched-wrong'); if(pEl) pEl.classList.add('matched-wrong'); }
   });
   // Evaluate round B
   Object.entries(PAIRS_T5Q4B).forEach(([aId,bId]) => {
     const aEl=document.querySelector(`[data-id="${aId}"]`);
     const bEl=document.querySelector(`[data-id="${bId}"]`);
-    if (qs.pairsB[aId]===bId) { correctB++; aEl?.classList.add('matched-correct'); bEl?.classList.add('matched-correct'); }
+    if (qs.pairsB[aId]===bId) { correctB++; aEl?.classList.remove('paired-card'); aEl?.classList.add('matched-correct'); bEl?.classList.remove('paired-card'); bEl?.classList.add('matched-correct'); }
     else { const pEl=document.querySelector(`[data-id="${qs.pairsB[aId]}"]`); aEl?.classList.add('matched-wrong'); if(pEl) pEl.classList.add('matched-wrong'); }
   });
 
@@ -3382,7 +3410,7 @@ function submitCardMatchT5() {
         if (qs[pkey][aId]!==bId) {
           const aEl=document.querySelector(`[data-id="${aId}"]`);
           const bEl=document.querySelector(`[data-id="${qs[pkey][aId]}"]`);
-          aEl?.classList.remove('matched-wrong','disabled-card'); bEl?.classList.remove('matched-wrong','disabled-card');
+          aEl?.classList.remove('matched-wrong','paired-card'); bEl?.classList.remove('matched-wrong','paired-card');
           delete qs[pkey][aId];
         }
       });
@@ -4014,8 +4042,8 @@ function submitCardMatch(qid) {
       correct++;
       aEl?.classList.add('matched-correct');
       bEl?.classList.add('matched-correct');
-      aEl?.classList.remove('disabled-card');
-      bEl?.classList.remove('disabled-card');
+      aEl?.classList.remove('paired-card');
+      bEl?.classList.remove('paired-card');
     } else {
       wrongAIds.push(aId);
       const pairedBEl = document.querySelector(`[data-id="${pairedBId}"]`);
