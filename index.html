@@ -1458,15 +1458,15 @@
         <div>
           <div class="card-group-label">Group B (Hebrew)</div>
           <div class="card-grid" id="cardB-t3q2">
-            <div class="match-card" data-group="B" data-id="h1" onclick="cardClick(this,'t3q2')">זה המון</div>
-            <div class="match-card" data-group="B" data-id="h2" onclick="cardClick(this,'t3q2')">רגוע</div>
             <div class="match-card" data-group="B" data-id="h3" onclick="cardClick(this,'t3q2')">זה בטח ממש קשה</div>
-            <div class="match-card" data-group="B" data-id="h4" onclick="cardClick(this,'t3q2')">הבנתי, קלטתי (אני מבין את זה עכשיו)</div>
-            <div class="match-card" data-group="B" data-id="h5" onclick="cardClick(this,'t3q2')">לנגן בפסנתר</div>
-            <div class="match-card" data-group="B" data-id="h6" onclick="cardClick(this,'t3q2')">אף פעם לא באמת חשבתי על זה ככה</div>
             <div class="match-card" data-group="B" data-id="h7" onclick="cardClick(this,'t3q2')">אני מניח</div>
-            <div class="match-card" data-group="B" data-id="h8" onclick="cardClick(this,'t3q2')">אסיר תודה</div>
+            <div class="match-card" data-group="B" data-id="h1" onclick="cardClick(this,'t3q2')">זה המון</div>
+            <div class="match-card" data-group="B" data-id="h5" onclick="cardClick(this,'t3q2')">לנגן בפסנתר</div>
             <div class="match-card" data-group="B" data-id="h9" onclick="cardClick(this,'t3q2')">בשנה הבאה</div>
+            <div class="match-card" data-group="B" data-id="h2" onclick="cardClick(this,'t3q2')">רגוע</div>
+            <div class="match-card" data-group="B" data-id="h8" onclick="cardClick(this,'t3q2')">אסיר תודה</div>
+            <div class="match-card" data-group="B" data-id="h4" onclick="cardClick(this,'t3q2')">הבנתי, קלטתי (אני מבין את זה עכשיו)</div>
+            <div class="match-card" data-group="B" data-id="h6" onclick="cardClick(this,'t3q2')">אף פעם לא באמת חשבתי על זה ככה</div>
           </div>
         </div>
       </div>
@@ -1526,15 +1526,17 @@
           <div class="card-group-label">Pictures</div>
           <div class="card-grid" id="imgPic-t3q4">
             <div class="img-card" data-group="P" data-id="p1" onclick="cardClick(this,'t3q4')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;padding:10px;gap:6px;">
-              <div style="font-size:4rem;line-height:1;">🪖🎹</div>
+              <div style="font-size:3.5rem;line-height:1;">🪖🎹</div>
               <div class="img-label" style="font-weight:600;">Soldier at the piano</div>
             </div>
             <div class="img-card" data-group="P" data-id="p2" onclick="cardClick(this,'t3q4')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;padding:10px;gap:6px;">
-              <div style="font-size:4rem;line-height:1;">🕯️✡️</div>
+              <div style="font-size:3.5rem;line-height:1;">🕯️✡️</div>
               <div class="img-label" style="font-weight:600;">Memorial candle</div>
             </div>
             <div class="img-card" data-group="P" data-id="p3" onclick="cardClick(this,'t3q4')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;padding:10px;gap:6px;">
-              <div style="font-size:4rem;line-height:1;">🇮🇱</div>
+              <div style="background:linear-gradient(180deg,white 33%,#0038b8 33%,#0038b8 67%,white 67%);width:90px;height:60px;border-radius:4px;border:1px solid #ccc;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:1.1rem;font-weight:900;color:#0038b8;letter-spacing:2px;margin-top:2px;text-shadow:0 0 3px white;">🇮🇱 IL</span>
+              </div>
               <div class="img-label" style="font-weight:600;">Israeli flag</div>
             </div>
           </div>
@@ -3421,43 +3423,7 @@ function submitCardMatchT5() {
   saveState();
 }
 
-// Hook cardClick to use t5q4 pairs storage
-// Override for t5q4a and t5q4b
-const _origCardClick = cardClick;
-function cardClick(el, qid) {
-  if (qid==='t5q4a' || qid==='t5q4b') {
-    const pkey = qid==='t5q4a' ? 'pairsA' : 'pairsB';
-    const qs = state.tab5.t5q4;
-    if (qs.done) return;
-    if (el.classList.contains('matched-correct')) return;
-    const group = el.dataset.group;
-    const prevSel = cardSelectedA[qid];
-    if (prevSel===el) { el.classList.remove('selected-card'); cardSelectedA[qid]=null; return; }
-    if (prevSel && prevSel.dataset.group===group) { prevSel.classList.remove('selected-card'); el.classList.add('selected-card'); cardSelectedA[qid]=el; return; }
-    if (!prevSel) { el.classList.add('selected-card'); cardSelectedA[qid]=el; return; }
-    // Pair
-    const isAFirst = ['HA','HB'].includes(prevSel.dataset.group);
-    const aEl = isAFirst ? prevSel : el;
-    const bEl = isAFirst ? el : prevSel;
-    aEl.classList.remove('selected-card'); bEl.classList.remove('selected-card'); cardSelectedA[qid]=null;
-    const aId=aEl.dataset.id, bId=bEl.dataset.id;
-    // Unpair old if any
-    const oldB=qs[pkey][aId];
-    if (oldB) { const ob=document.querySelector(`[data-id="${oldB}"]`); if(ob){ob.classList.remove('disabled-card');ob.style.opacity='';} }
-    const oldA=Object.keys(qs[pkey]).find(k=>qs[pkey][k]===bId);
-    if (oldA) { const oa=document.querySelector(`[data-id="${oldA}"]`); if(oa){oa.classList.remove('disabled-card');oa.style.opacity='';} delete qs[pkey][oldA]; }
-    qs[pkey][aId]=bId;
-    aEl.classList.add('paired-card'); bEl.classList.add('paired-card');
-    aEl.style.opacity=''; bEl.style.opacity='';
-    // Enable submit when both rounds complete
-    const aFull=Object.keys(PAIRS_T5Q4A).every(k=>qs.pairsA[k]);
-    const bFull=Object.keys(PAIRS_T5Q4B).every(k=>qs.pairsB[k]);
-    document.getElementById('submit-t5q4').disabled=!(aFull&&bFull);
-    saveState();
-  } else {
-    _origCardClick(el, qid);
-  }
-}
+// cardClick override removed — unified version below
 
 // ── Tab 5 scoring ──
 function getTab5Max() {
@@ -3953,42 +3919,59 @@ const CARD_PAIRS_T3Q4 = { t1:'p3', t2:'p2', t3:'p1' }; // flag=p1(Israeli flag),
 let cardSelectedA = {}; // {qid: element}
 
 function cardClick(el, qid) {
-  const qs = qid === 't3q2' ? state.tab3.t3q2 : state.tab3.t3q4;
-  if (qs.done) return;
-  // Only block already-confirmed correct cards
+  // ── Unified card-click for t3q2, t3q4, t5q4a, t5q4b ──
+  // A-side groups: 'A' (t3q2), 'T' (t3q4), 'HA' (t5q4a), 'HB' (t5q4b)
+  // B-side groups: 'B' (t3q2), 'P' (t3q4), 'EA' (t5q4a), 'EB' (t5q4b)
+  const A_GROUPS = ['A', 'T', 'HA', 'HB'];
+
+  // Get correct state object
+  let qs, pkey, correctPairs;
+  if (qid === 't3q2') {
+    qs = state.tab3.t3q2; correctPairs = CARD_PAIRS_T3Q2; pkey = 'pairs';
+  } else if (qid === 't3q4') {
+    qs = state.tab3.t3q4; correctPairs = CARD_PAIRS_T3Q4; pkey = 'pairs';
+  } else if (qid === 't5q4a') {
+    qs = state.tab5.t5q4; correctPairs = PAIRS_T5Q4A; pkey = 'pairsA';
+  } else if (qid === 't5q4b') {
+    qs = state.tab5.t5q4; correctPairs = PAIRS_T5Q4B; pkey = 'pairsB';
+  } else {
+    return;
+  }
+
+  if (!qs || qs.done) return;
   if (el.classList.contains('matched-correct')) return;
 
   const group = el.dataset.group;
   const prevSel = cardSelectedA[qid];
 
-  // Clicking same card — deselect
+  // Deselect if clicking same card
   if (prevSel === el) {
     el.classList.remove('selected-card');
     cardSelectedA[qid] = null;
     return;
   }
 
-  // Same group — switch selection
-  if (prevSel && prevSel.dataset.group === group) {
+  // Same side — switch selection
+  const elIsA    = A_GROUPS.includes(group);
+  const prevIsA  = prevSel ? A_GROUPS.includes(prevSel.dataset.group) : null;
+
+  if (prevSel && elIsA === prevIsA) {
     prevSel.classList.remove('selected-card');
     el.classList.add('selected-card');
     cardSelectedA[qid] = el;
     return;
   }
 
-  // No previous — just select
+  // No previous selection — just highlight
   if (!prevSel) {
     el.classList.add('selected-card');
     cardSelectedA[qid] = el;
     return;
   }
 
-  // Two different groups — form a pair
-  const correctPairs = qid === 't3q2' ? CARD_PAIRS_T3Q2 : CARD_PAIRS_T3Q4;
-
-  const isAFirst = prevSel.dataset.group === 'A' || prevSel.dataset.group === 'T';
-  const aEl = isAFirst ? prevSel : el;
-  const bEl = isAFirst ? el : prevSel;
+  // ── Two different sides — form a pair ──
+  const aEl = prevIsA ? prevSel : el;
+  const bEl = prevIsA ? el : prevSel;
 
   aEl.classList.remove('selected-card');
   bEl.classList.remove('selected-card');
@@ -3997,27 +3980,41 @@ function cardClick(el, qid) {
   const aId = aEl.dataset.id;
   const bId = bEl.dataset.id;
 
-  // Clear old visual pairing for this A card
-  const oldBId = qs.pairs[aId];
+  if (!qs[pkey]) qs[pkey] = {};
+
+  // Un-pair old B that was linked to this A
+  const oldBId = qs[pkey][aId];
   if (oldBId) {
     const oldB = document.querySelector(`[data-id="${oldBId}"]`);
-    if (oldB) { oldB.classList.remove('paired-card'); oldB.style.background = ''; }
-  }
-  // Clear old pairing for this B card
-  const oldAId = Object.keys(qs.pairs).find(k => qs.pairs[k] === bId);
-  if (oldAId) {
-    const oldA = document.querySelector(`[data-id="${oldAId}"]`);
-    if (oldA) { oldA.classList.remove('paired-card'); oldA.style.background = ''; }
-    delete qs.pairs[oldAId];
+    if (oldB) { oldB.classList.remove('paired-card', 'matched-wrong'); }
   }
 
-  qs.pairs[aId] = bId;
-  // Show pairing visually with a subtle tint
+  // Un-pair old A that was linked to this B
+  const oldAId = Object.keys(qs[pkey]).find(k => qs[pkey][k] === bId);
+  if (oldAId) {
+    const oldA = document.querySelector(`[data-id="${oldAId}"]`);
+    if (oldA) { oldA.classList.remove('paired-card', 'matched-wrong'); }
+    delete qs[pkey][oldAId];
+  }
+
+  // Record and show pairing
+  qs[pkey][aId] = bId;
   aEl.classList.add('paired-card');
   bEl.classList.add('paired-card');
 
+  // Enable submit when all pairs made
   const totalPairs = Object.keys(correctPairs).length;
-  document.getElementById(`submit-${qid}`).disabled = Object.keys(qs.pairs).length < totalPairs;
+  const madePairs  = Object.keys(qs[pkey]).length;
+
+  if (qid === 't5q4a' || qid === 't5q4b') {
+    // Both rounds must be complete for submit-t5q4
+    const aFull = Object.keys(PAIRS_T5Q4A).every(k => qs.pairsA && qs.pairsA[k]);
+    const bFull = Object.keys(PAIRS_T5Q4B).every(k => qs.pairsB && qs.pairsB[k]);
+    document.getElementById('submit-t5q4').disabled = !(aFull && bFull);
+  } else {
+    document.getElementById(`submit-${qid}`).disabled = madePairs < totalPairs;
+  }
+
   saveState();
 }
 
