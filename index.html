@@ -612,6 +612,9 @@
   .match-card.matched-correct { border-color: var(--correct); background: var(--correct-bg); color: var(--correct); cursor: default; }
   .match-card.matched-wrong { border-color: var(--wrong); background: var(--wrong-bg); color: var(--wrong); }
   .match-card.disabled-card { cursor: default; }
+  .match-card.paired-card { border-color: var(--blue); background: #eef2fb; }
+  .img-card.paired-card { border-color: var(--blue); }
+  .text-card.paired-card { border-color: var(--blue); background: #eef2fb; }
 
   /* Image match */
   .img-match-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
@@ -1047,16 +1050,16 @@
       <div class="question-note">Choose all the options you like:</div>
       <div class="options-list" id="options-q6">
         <div class="option-item" data-q="q6" data-val="A" onclick="selectCheckbox(this)">
-          <div class="option-box">✓</div>A song
+          <div class="option-box"></div>A song
         </div>
         <div class="option-item" data-q="q6" data-val="B" onclick="selectCheckbox(this)">
-          <div class="option-box">✓</div>Telling stories
+          <div class="option-box"></div>Telling stories
         </div>
         <div class="option-item" data-q="q6" data-val="C" onclick="selectCheckbox(this)">
-          <div class="option-box">✓</div>A special day
+          <div class="option-box"></div>A special day
         </div>
         <div class="option-item" data-q="q6" data-val="D" onclick="selectCheckbox(this)">
-          <div class="option-box">✓</div>A picture
+          <div class="option-box"></div>A picture
         </div>
       </div>
       <button class="submit-btn" id="submit-q6" onclick="submitCheckbox()" disabled>Submit</button>
@@ -1120,23 +1123,23 @@
 
       <!-- Draggable lines -->
       <div class="drag-list" id="drag-list-t2q1">
+        <div class="drag-item" draggable="true" data-id="E">
+          <span class="di-speaker itamar">Itamar:</span> But isn't it, like, kind of sad?
+        </div>
+        <div class="drag-item" draggable="true" data-id="G">
+          <span class="di-speaker itamar">Itamar:</span> Do you know anyone who… you know, didn't make it?
+        </div>
         <div class="drag-item" draggable="true" data-id="B">
           <span class="di-speaker safta">Safta Sarah:</span> It's for Yom HaZikaron, the day we remember soldiers who died protecting Israel.
-        </div>
-        <div class="drag-item" draggable="true" data-id="C">
-          <span class="di-speaker itamar">Itamar:</span> Oh right. I think we talked about it at school. But why do we need a whole day for that?
         </div>
         <div class="drag-item" draggable="true" data-id="D">
           <span class="di-speaker safta">Safta Sarah:</span> Because, Itamar, these soldiers gave everything so we could live safely in our country. It's not just a day — it's how we remember them.
         </div>
-        <div class="drag-item" draggable="true" data-id="E">
-          <span class="di-speaker itamar">Itamar:</span> But isn't it, like, kind of sad?
-        </div>
         <div class="drag-item" draggable="true" data-id="F">
           <span class="di-speaker safta">Safta Sarah:</span> It is, yes. But it's also important. Just think about it – they had to be brave to keep others safe, even when it was dangerous.
         </div>
-        <div class="drag-item" draggable="true" data-id="G">
-          <span class="di-speaker itamar">Itamar:</span> Do you know anyone who… you know, didn't make it?
+        <div class="drag-item" draggable="true" data-id="C">
+          <span class="di-speaker itamar">Itamar:</span> Oh right. I think we talked about it at school. But why do we need a whole day for that?
         </div>
       </div>
 
@@ -1206,21 +1209,21 @@
         <div class="word-bank" id="match-bank-t2q3">
           <div class="word-bank-title">בנק תשובות</div>
           <div class="bank-chips">
-            <div class="bank-chip" data-val="נר" onclick="matchBankClick(this)">נר</div>
-            <div class="bank-chip" data-val="חייל" onclick="matchBankClick(this)">חייל</div>
-            <div class="bank-chip" data-val="אה נכון" onclick="matchBankClick(this)">אה נכון</div>
-            <div class="bank-chip" data-val="להגן על המדינה" onclick="matchBankClick(this)">להגן על המדינה</div>
-            <div class="bank-chip" data-val="לחיות בשלום" onclick="matchBankClick(this)">לחיות בשלום</div>
-            <div class="bank-chip" data-val="לשמור על ביטחוננו" onclick="matchBankClick(this)">לשמור על ביטחוננו</div>
-            <div class="bank-chip" data-val="אדיב" onclick="matchBankClick(this)">אדיב</div>
             <div class="bank-chip" data-val="אמיץ" onclick="matchBankClick(this)">אמיץ</div>
-            <div class="bank-chip" data-val="אפילו כאשר" onclick="matchBankClick(this)">אפילו כאשר</div>
-            <div class="bank-chip" data-val="מסוכן" onclick="matchBankClick(this)">מסוכן</div>
+            <div class="bank-chip" data-val="לחיות בשלום" onclick="matchBankClick(this)">לחיות בשלום</div>
             <div class="bank-chip" data-val="מצחיק" onclick="matchBankClick(this)">מצחיק</div>
-            <div class="bank-chip" data-val="לא שרד" onclick="matchBankClick(this)">לא שרד</div>
-            <div class="bank-chip" data-val="נתן הכל" onclick="matchBankClick(this)">נתן הכל</div>
+            <div class="bank-chip" data-val="נר" onclick="matchBankClick(this)">נר</div>
             <div class="bank-chip" data-val="הצטרף לצבא" onclick="matchBankClick(this)">הצטרף לצבא</div>
+            <div class="bank-chip" data-val="אפילו כאשר" onclick="matchBankClick(this)">אפילו כאשר</div>
+            <div class="bank-chip" data-val="לא שרד" onclick="matchBankClick(this)">לא שרד</div>
+            <div class="bank-chip" data-val="חייל" onclick="matchBankClick(this)">חייל</div>
+            <div class="bank-chip" data-val="נתן הכל" onclick="matchBankClick(this)">נתן הכל</div>
+            <div class="bank-chip" data-val="אדיב" onclick="matchBankClick(this)">אדיב</div>
             <div class="bank-chip" data-val="יום אחד" onclick="matchBankClick(this)">יום אחד</div>
+            <div class="bank-chip" data-val="להגן על המדינה" onclick="matchBankClick(this)">להגן על המדינה</div>
+            <div class="bank-chip" data-val="מסוכן" onclick="matchBankClick(this)">מסוכן</div>
+            <div class="bank-chip" data-val="אה נכון" onclick="matchBankClick(this)">אה נכון</div>
+            <div class="bank-chip" data-val="לשמור על ביטחוננו" onclick="matchBankClick(this)">לשמור על ביטחוננו</div>
           </div>
         </div>
       </div>
@@ -1279,23 +1282,23 @@
 
       <div class="sent-complete-grid">
         <div class="sent-row">
-          <span class="sent-static">We light a </span><span class="sent-letter">c</span><input class="sent-blank" id="sb-1" placeholder="andle..." data-answer="andle">
-          <span class="sent-static"> to remember the </span><span class="sent-letter">s</span><input class="sent-blank" id="sb-2" placeholder="oldiers..." data-answer="oldiers">
+          <span class="sent-static">We light a </span><input class="sent-blank" id="sb-1" placeholder="..." data-answer="candle">
+          <span class="sent-static"> to remember the </span><input class="sent-blank" id="sb-2" placeholder="..." data-answer="soldiers">
           <span class="sent-static"> who died.</span>
         </div>
         <div class="sent-row">
-          <span class="sent-static">He was </span><span class="sent-letter">b</span><input class="sent-blank" id="sb-3" placeholder="rave..." data-answer="rave">
-          <span class="sent-static"> even </span><span class="sent-letter">w</span><input class="sent-blank" id="sb-4" placeholder="hen..." data-answer="hen">
+          <span class="sent-static">He was </span><input class="sent-blank" id="sb-3" placeholder="..." data-answer="brave">
+          <span class="sent-static"> even </span><input class="sent-blank" id="sb-4" placeholder="..." data-answer="when">
           <span class="sent-static"> it was dangerous.</span>
         </div>
         <div class="sent-row">
-          <span class="sent-static">Soldiers give </span><span class="sent-letter">e</span><input class="sent-blank" id="sb-5" placeholder="verything..." data-answer="verything">
-          <span class="sent-static"> to </span><span class="sent-letter">p</span><input class="sent-blank" id="sb-6" placeholder="rotect..." data-answer="rotect">
+          <span class="sent-static">Soldiers give </span><input class="sent-blank" id="sb-5" placeholder="..." data-answer="everything">
+          <span class="sent-static"> to </span><input class="sent-blank" id="sb-6" placeholder="..." data-answer="protect">
           <span class="sent-static"> the country.</span>
         </div>
         <div class="sent-row">
-          <span class="sent-static">Israeli teenagers </span><span class="sent-letter">j</span><input class="sent-blank" id="sb-7" placeholder="oin..." data-answer="oin">
-          <span class="sent-static"> the </span><span class="sent-letter">a</span><input class="sent-blank" id="sb-8" placeholder="rmy..." data-answer="rmy">
+          <span class="sent-static">Israeli teenagers </span><input class="sent-blank" id="sb-7" placeholder="..." data-answer="join">
+          <span class="sent-static"> the </span><input class="sent-blank" id="sb-8" placeholder="..." data-answer="army">
           <span class="sent-static"> when they finish school.</span>
         </div>
       </div>
@@ -1522,18 +1525,17 @@
         <div>
           <div class="card-group-label">Pictures</div>
           <div class="card-grid" id="imgPic-t3q4">
-            <div class="img-card" data-group="P" data-id="p1" onclick="cardClick(this,'t3q4')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flag_of_Israel.svg/320px-Flag_of_Israel.svg.png" alt="Israeli flag">
-              <div class="img-label">Picture 1</div>
+            <div class="img-card" data-group="P" data-id="p1" onclick="cardClick(this,'t3q4')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;padding:10px;gap:6px;">
+              <div style="font-size:4rem;line-height:1;">🪖🎹</div>
+              <div class="img-label" style="font-weight:600;">Soldier at the piano</div>
             </div>
-            <div class="img-card" data-group="P" data-id="p2" onclick="cardClick(this,'t3q4')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Yizkor_candle.jpg/320px-Yizkor_candle.jpg" alt="Memorial candle">
-              <div class="img-label">Picture 2</div>
+            <div class="img-card" data-group="P" data-id="p2" onclick="cardClick(this,'t3q4')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;padding:10px;gap:6px;">
+              <div style="font-size:4rem;line-height:1;">🕯️✡️</div>
+              <div class="img-label" style="font-weight:600;">Memorial candle</div>
             </div>
-            <div class="img-card" data-group="P" data-id="p3" onclick="cardClick(this,'t3q4')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Piano_and_person.jpg/320px-Piano_and_person.jpg" alt="Person at piano"
-                onerror="this.src='https://via.placeholder.com/320x130?text=Piano+Player'">
-              <div class="img-label">Picture 3</div>
+            <div class="img-card" data-group="P" data-id="p3" onclick="cardClick(this,'t3q4')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;padding:10px;gap:6px;">
+              <div style="font-size:4rem;line-height:1;">🇮🇱</div>
+              <div class="img-label" style="font-weight:600;">Israeli flag</div>
             </div>
           </div>
         </div>
@@ -1585,12 +1587,12 @@
         <div class="attempt-dot" id="dot-t3q6-2"></div>
       </div>
       <div class="options-list" id="options-t3q6">
-        <div class="option-item" data-q="t3q6" data-val="A" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box">✓</div>We think about the soldiers.</div>
-        <div class="option-item" data-q="t3q6" data-val="B" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box">✓</div>We light a candle.</div>
-        <div class="option-item" data-q="t3q6" data-val="C" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box">✓</div>We have a barbeque.</div>
-        <div class="option-item" data-q="t3q6" data-val="D" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box">✓</div>We remember the soldiers who died.</div>
-        <div class="option-item" data-q="t3q6" data-val="E" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box">✓</div>We thank the soldiers.</div>
-        <div class="option-item" data-q="t3q6" data-val="F" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box">✓</div>We go to Yad Vashem.</div>
+        <div class="option-item" data-q="t3q6" data-val="A" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box"></div>We think about the soldiers.</div>
+        <div class="option-item" data-q="t3q6" data-val="B" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box"></div>We light a candle.</div>
+        <div class="option-item" data-q="t3q6" data-val="C" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box"></div>We have a barbeque.</div>
+        <div class="option-item" data-q="t3q6" data-val="D" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box"></div>We remember the soldiers who died.</div>
+        <div class="option-item" data-q="t3q6" data-val="E" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box"></div>We thank the soldiers.</div>
+        <div class="option-item" data-q="t3q6" data-val="F" onclick="selectCheckboxQ(this,'t3q6')"><div class="option-box"></div>We go to Yad Vashem.</div>
       </div>
       <button class="submit-btn" id="submit-t3q6" onclick="submitCheckboxQ('t3q6')" disabled>Submit</button>
       <div class="feedback-box" id="feedback-t3q6"></div>
@@ -2129,7 +2131,7 @@
         </div>
         <div style="display:flex;align-items:center;gap:8px;font-size:0.93rem;">
           <span style="min-width:80px;">Sorry, I</span>
-          <input class="be-input" id="w4c" placeholder="..." data-answers="completely forgot|forgot completely|completely forget|forgot" oninput="onW4Input()">
+          <input class="be-input" id="w4c" placeholder="..." data-answers="completely forgot|completely|forgot" oninput="onW4Input()">
           <span>forgot — <span style="direction:rtl;">מצטערת אני שכחתי לגמרי</span></span>
         </div>
         <div style="display:flex;align-items:center;gap:8px;font-size:0.93rem;">
@@ -2306,6 +2308,16 @@
 
   </div>
   <!-- end tab6 -->
+
+  <!-- Reset button -->
+  <div style="text-align:center;margin:32px 0 0;">
+    <button onclick="resetAll()" style="padding:10px 24px;background:transparent;border:2px solid var(--wrong);color:var(--wrong);border-radius:8px;font-family:'Source Serif 4',serif;font-size:0.88rem;cursor:pointer;transition:all 0.2s;"
+      onmouseover="this.style.background='var(--wrong)';this.style.color='white'"
+      onmouseout="this.style.background='transparent';this.style.color='var(--wrong)'">
+      🔄 Reset All Answers
+    </button>
+    <p style="font-size:0.78rem;color:var(--text-muted);margin-top:6px;">This will clear all your answers so you can practise again.</p>
+  </div>
 
   <!-- Overall score (shown when all tabs done) -->
   <div class="overall-score-section" id="overall-score">
@@ -2901,46 +2913,48 @@ const MATCH_ANSWERS = {
 let matchSelectedChip = null; // currently selected chip for t2q3
 let matchSelectedChip4 = null; // for t2q4
 
+// Universal chip selection store
+const matchChipSelected = {}; // {bankId: chip}
+
 function matchBankClick(chip, qid) {
   if (!qid) qid = 't2q3';
-  if (state.tab2[qid]?.done) return;
-  const bankId = qid === 't2q4' ? 'match-bank-t2q4' : 'match-bank-t2q3';
+  const qs = getQState(qid);
+  if (!qs || qs.done) return;
+  const bankId = `match-bank-${qid}`;
   document.querySelectorAll(`#${bankId} .bank-chip`).forEach(c => c.classList.remove('selected'));
-  if ((qid === 't2q3' ? matchSelectedChip : matchSelectedChip4) === chip) {
-    if (qid === 't2q3') matchSelectedChip = null;
-    else matchSelectedChip4 = null;
-    return;
-  }
+  if (matchChipSelected[qid] === chip) { matchChipSelected[qid] = null; return; }
   chip.classList.add('selected');
-  if (qid === 't2q3') matchSelectedChip = chip;
-  else matchSelectedChip4 = chip;
+  matchChipSelected[qid] = chip;
 }
 
 function matchDropClick(drop, qid) {
   if (!qid) qid = 't2q3';
-  if (state.tab2[qid]?.done) return;
-  const sel = qid === 't2q3' ? matchSelectedChip : matchSelectedChip4;
+  const qs = getQState(qid);
+  if (!qs || qs.done) return;
+  const sel = matchChipSelected[qid];
   if (!sel) return;
   const val = sel.dataset.val;
   const key = drop.dataset.key;
-  // If slot already has an answer, return old chip to bank
-  const oldVal = state.tab2[qid].answers[key];
+  const bankId = `match-bank-${qid}`;
+
+  // Return old answer chip to bank
+  if (!qs.answers) qs.answers = {};
+  const oldVal = qs.answers[key];
   if (oldVal) {
-    const oldChip = document.querySelector(`#${qid === 't2q4' ? 'match-bank-t2q4' : 'match-bank-t2q3'} [data-val="${oldVal}"]`);
+    const oldChip = document.querySelector(`#${bankId} [data-val="${oldVal}"]`);
     if (oldChip) oldChip.classList.remove('used');
   }
-  state.tab2[qid].answers[key] = val;
+
+  qs.answers[key] = val;
   drop.textContent = val;
   drop.classList.add('has-answer');
   sel.classList.add('used');
   sel.classList.remove('selected');
-  if (qid === 't2q3') matchSelectedChip = null;
-  else matchSelectedChip4 = null;
+  matchChipSelected[qid] = null;
 
-  // enable submit if all filled
-  const allFilled = qid === 't2q3'
-    ? Object.keys(MATCH_ANSWERS).every(k => state.tab2.t2q3.answers[k])
-    : ['s1','s2','s3','s4'].every(k => state.tab2.t2q4.answers[k]);
+  // Check if all slots filled — enable submit
+  const allDrops = document.querySelectorAll(`#match-pairs-${qid} .match-drop`);
+  const allFilled = [...allDrops].every(d => d.textContent.trim().length > 0);
   document.getElementById(`submit-${qid}`).disabled = !allFilled;
   saveState();
 }
@@ -3387,7 +3401,7 @@ function cardClick(el, qid) {
     const pkey = qid==='t5q4a' ? 'pairsA' : 'pairsB';
     const qs = state.tab5.t5q4;
     if (qs.done) return;
-    if (el.classList.contains('matched-correct')||el.classList.contains('disabled-card')) return;
+    if (el.classList.contains('matched-correct')) return;
     const group = el.dataset.group;
     const prevSel = cardSelectedA[qid];
     if (prevSel===el) { el.classList.remove('selected-card'); cardSelectedA[qid]=null; return; }
@@ -3405,7 +3419,8 @@ function cardClick(el, qid) {
     const oldA=Object.keys(qs[pkey]).find(k=>qs[pkey][k]===bId);
     if (oldA) { const oa=document.querySelector(`[data-id="${oldA}"]`); if(oa){oa.classList.remove('disabled-card');oa.style.opacity='';} delete qs[pkey][oldA]; }
     qs[pkey][aId]=bId;
-    aEl.classList.add('disabled-card'); bEl.classList.add('disabled-card'); aEl.style.opacity='0.75'; bEl.style.opacity='0.75';
+    aEl.classList.add('paired-card'); bEl.classList.add('paired-card');
+    aEl.style.opacity=''; bEl.style.opacity='';
     // Enable submit when both rounds complete
     const aFull=Object.keys(PAIRS_T5Q4A).every(k=>qs.pairsA[k]);
     const bFull=Object.keys(PAIRS_T5Q4B).every(k=>qs.pairsB[k]);
@@ -3458,7 +3473,7 @@ function submitGapFillT5(qid) {
   const qs = state.tab5[qid];
   if (qs.done) return;
   qs.attempts++;
-  const blanks = document.querySelectorAll(`#gap-sentences-${qid} .gap-blank, #qcard-${qid} .gap-blank`);
+  const blanks = document.querySelectorAll(`#qcard-${qid} .gap-blank`);
   let correct=0;
   blanks.forEach(b => {
     if (b.dataset.current===b.dataset.answer) { correct++; b.classList.add('blank-correct'); b.classList.remove('blank-wrong'); }
@@ -3912,9 +3927,10 @@ let cardSelectedA = {}; // {qid: element}
 function cardClick(el, qid) {
   const qs = qid === 't3q2' ? state.tab3.t3q2 : state.tab3.t3q4;
   if (qs.done) return;
-  if (el.classList.contains('matched-correct') || el.classList.contains('disabled-card')) return;
+  // Only block already-confirmed correct cards
+  if (el.classList.contains('matched-correct')) return;
 
-  const group = el.dataset.group; // A/B for t3q2, T/P for t3q4
+  const group = el.dataset.group;
   const prevSel = cardSelectedA[qid];
 
   // Clicking same card — deselect
@@ -3942,7 +3958,6 @@ function cardClick(el, qid) {
   // Two different groups — form a pair
   const correctPairs = qid === 't3q2' ? CARD_PAIRS_T3Q2 : CARD_PAIRS_T3Q4;
 
-  // Determine which is "A" side (left/text) and which is "B" side (right/image/Hebrew)
   const isAFirst = prevSel.dataset.group === 'A' || prevSel.dataset.group === 'T';
   const aEl = isAFirst ? prevSel : el;
   const bEl = isAFirst ? el : prevSel;
@@ -3954,25 +3969,24 @@ function cardClick(el, qid) {
   const aId = aEl.dataset.id;
   const bId = bEl.dataset.id;
 
-  // If this A card was previously paired, un-disable the old B card
+  // Clear old visual pairing for this A card
   const oldBId = qs.pairs[aId];
   if (oldBId) {
     const oldB = document.querySelector(`[data-id="${oldBId}"]`);
-    if (oldB) { oldB.classList.remove('disabled-card'); oldB.style.opacity = ''; }
+    if (oldB) { oldB.classList.remove('paired-card'); oldB.style.background = ''; }
   }
-  // If this B card was previously paired by another A card, clear that too
+  // Clear old pairing for this B card
   const oldAId = Object.keys(qs.pairs).find(k => qs.pairs[k] === bId);
   if (oldAId) {
     const oldA = document.querySelector(`[data-id="${oldAId}"]`);
-    if (oldA) { oldA.classList.remove('disabled-card'); oldA.style.opacity = ''; }
+    if (oldA) { oldA.classList.remove('paired-card'); oldA.style.background = ''; }
     delete qs.pairs[oldAId];
   }
 
   qs.pairs[aId] = bId;
-  aEl.classList.add('disabled-card');
-  bEl.classList.add('disabled-card');
-  aEl.style.opacity = '0.75';
-  bEl.style.opacity = '0.75';
+  // Show pairing visually with a subtle tint
+  aEl.classList.add('paired-card');
+  bEl.classList.add('paired-card');
 
   const totalPairs = Object.keys(correctPairs).length;
   document.getElementById(`submit-${qid}`).disabled = Object.keys(qs.pairs).length < totalPairs;
@@ -4059,7 +4073,7 @@ const SENT3_ANSWERS = {
 };
 
 function submitSentMatch3() {
-  const qs = state.tab3.t3q3;
+  const qs = getQState('t3q3');
   if (qs.done) return;
   qs.attempts++;
   let correct = 0;
@@ -4107,9 +4121,17 @@ function submitSentMatch3() {
 // ── T3Q5: Gap fill with clickable chips ──
 let gapSelected = {}; // {qid: chip element}
 
+function getQState(qid) {
+  if (qid.startsWith('t5')) return state.tab5[qid];
+  if (qid.startsWith('t4')) return state.tab4[qid];
+  if (qid.startsWith('t2')) return state.tab2[qid];
+  if (qid.startsWith('t3')) return state.tab3[qid];
+  return state.tab1[qid];
+}
+
 function gapChipClick(chip, qid) {
-  const qs = state.tab3[qid];
-  if (qs.done) return;
+  const qs = getQState(qid);
+  if (!qs || qs.done) return;
   if (chip.classList.contains('chip-used')) return;
   const bankId = `gap-bank-${qid}`;
   document.querySelectorAll(`#${bankId} .gap-chip`).forEach(c => c.classList.remove('chip-selected'));
@@ -4119,8 +4141,8 @@ function gapChipClick(chip, qid) {
 }
 
 function gapBlankClick(blank, qid) {
-  const qs = state.tab3[qid];
-  if (qs.done) return;
+  const qs = getQState(qid);
+  if (!qs || qs.done) return;
   const chip = gapSelected[qid];
   if (!chip) return;
   const word = chip.dataset.word;
@@ -4139,44 +4161,46 @@ function gapBlankClick(blank, qid) {
   chip.classList.remove('chip-selected');
   gapSelected[qid] = null;
 
+  if (!qs.answers) qs.answers = {};
   qs.answers[blank.id] = word;
 
-  // Enable submit when all 7 blanks filled
-  const blanks = document.querySelectorAll(`#gap-sentences-${qid} .gap-blank`);
-  const filled = [...blanks].filter(b => b.dataset.current);
-  document.getElementById(`submit-${qid}`).disabled = filled.length < blanks.length;
+  // Enable submit when all blanks filled
+  const allBlanks = document.querySelectorAll(`#qcard-${qid} .gap-blank`);
+  const filled = [...allBlanks].filter(b => b.dataset.current);
+  document.getElementById(`submit-${qid}`).disabled = filled.length < allBlanks.length;
   saveState();
 }
 
 function submitGapFill(qid) {
-  const qs = state.tab3[qid];
-  if (qs.done) return;
+  const qs = getQState(qid);
+  if (!qs || qs.done) return;
   qs.attempts++;
-  const blanks = document.querySelectorAll(`#gap-sentences-${qid} .gap-blank`);
+  const blanks = document.querySelectorAll(`#qcard-${qid} .gap-blank`);
   let correct = 0;
   blanks.forEach(b => {
     if (b.dataset.current === b.dataset.answer) { correct++; b.classList.add('blank-correct'); b.classList.remove('blank-wrong'); }
     else b.classList.add('blank-wrong');
   });
   updateDots(qid, correct === blanks.length, qs.attempts);
+  const updateScore = qid.startsWith('t3') ? updateTab3Score : updateTab2Score;
   if (correct === blanks.length) {
     qs.done = true; qs.score = qs.attempts === 1 ? POINTS[qid] : Math.round(POINTS[qid] * 0.6);
     showFeedback(qid,'correct',`✅ All correct! (+${qs.score} points)`);
     document.getElementById(`submit-${qid}`).classList.add('done'); document.getElementById(`submit-${qid}`).disabled = true;
-    updateTab3Score();
+    updateScore();
   } else if (qs.attempts >= 2) {
     qs.done = true; qs.score = 0;
     blanks.forEach(b => { if (b.classList.contains('blank-wrong')) b.textContent = b.dataset.answer; });
     showFeedback(qid,'wrong',`❌ ${correct}/${blanks.length} correct. Answers filled in.`);
     document.getElementById(`submit-${qid}`).classList.add('done'); document.getElementById(`submit-${qid}`).disabled = true;
-    updateTab3Score();
+    updateScore();
   } else {
     blanks.forEach(b => {
       if (b.classList.contains('blank-wrong')) {
         const chip = document.querySelector(`#gap-bank-${qid} [data-word="${b.dataset.current}"]`);
         if (chip) chip.classList.remove('chip-used');
         b.textContent = '___'; delete b.dataset.current; b.classList.remove('blank-wrong','blank-filled');
-        delete qs.answers[b.id];
+        if (qs.answers) delete qs.answers[b.id];
       }
     });
     document.getElementById(`submit-${qid}`).disabled = true;
@@ -4475,6 +4499,12 @@ function restoreTab2() {
   }
 
   updateProgress();
+}
+
+function resetAll() {
+  if (!confirm('Are you sure you want to reset all your answers? This cannot be undone.')) return;
+  localStorage.removeItem(SAVE_KEY);
+  location.reload();
 }
 
 loadState();
